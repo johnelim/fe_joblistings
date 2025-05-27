@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  /* primary */
+  --color-dark-cyan: rgb(90, 165, 165);
+
+  /* neutral */
+  --color-gray-cyan: rgb(230, 252, 252);
+  --color-gray-tablets: rgb(224, 247, 247);
+  --color-gray-brush: rgb(119, 135, 135);
+  --color-dark-border: rgb(35, 46, 46);
+}
+
+@layer base {
+  body {
+    @apply font-bold bg-gray-cyan;
+  }
+}
+
+@layer components {
+  .job-card {
+    @apply bg-white rounded-xl sm:flex sm:flex-row sm:justify-between items-center w-4/5
+      border-l-12 border-transparent hover:border-l-12 hover:border-dark-cyan
+      shadow-2xl relative p-6 pl-8
+      sm:aspect-auto block;
+  }
+
+  .job-board {
+    @apply gap-4 flex flex-col items-center p-6 pt-24;
+  }
+
+  .rounded-button {
+    @apply p-1 pl-4 pr-4 rounded-full text-sm hover:brightness-105 hover:scale-105 transition-all duration-300;
+  }
+
+  .newjob {
+    @apply text-white bg-dark-cyan;
+  }
+
+  .featured {
+    @apply text-white bg-black;
+  }
+
+  .position-button {
+    @apply text-xl;
+  }
+
+  .filter-button {
+    @apply bg-gray-cyan text-dark-cyan hover:bg-dark-cyan hover:text-gray-cyan
+      p-2 rounded-md;
+  }
+
+  .filter-bar-nav {
+    @apply p-4 flex absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-4/5 bg-white shadow-2xl rounded-md gap-4 flex-wrap;
+  }
+
+  .filter-button-nav {
+    @apply bg-gray-cyan text-dark-cyan rounded-md flex items-center pl-2 pr-12 relative overflow-clip capitalize;
+  }
+
+  .filter-remove-icon {
+    @apply bg-dark-cyan fill-white h-full aspect-square p-2 absolute right-0;
+  }
+
+  .filter-bar-clear {
+    @apply text-gray-brush hover:text-dark-cyan font-bold hover:underline sm:absolute sm:right-6;
+  }
+}
