@@ -1,13 +1,13 @@
-export default function FilterBarClearButton({
-  handleClearClick,
-}: {
-  handleClearClick: () => void;
-}) {
+import { useSearchParams } from "react-router";
+
+export default function FilterBarClearButton() {
+  const [, setSearchParams] = useSearchParams();
+
   return (
     <button
       type="button"
       className="filter-bar-clear"
-      onClick={() => handleClearClick()}
+      onClick={() => setSearchParams({})}
     >
       Clear
     </button>

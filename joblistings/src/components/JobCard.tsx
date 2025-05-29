@@ -1,6 +1,5 @@
 import type { JobEntry } from "../types/JobEntry";
-import { ActiveFilterContext } from "../contexts/ActiveFilterContext";
-import { useContext } from "react";
+import { useSearchParams } from "react-router";
 
 export default function JobCard({
   company,
@@ -16,12 +15,14 @@ export default function JobCard({
   languages,
   tools,
 }: JobEntry) {
-  const context = useContext(ActiveFilterContext);
-  if (!context) {
-    throw "undefined context";
-  }
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const { addFilter } = context;
+  const handleAddFilter = (newFilter: string) => {
+    const currentFilters = searchParams.getAll("filter");
+    if (!currentFilters.includes(newFilter)) {
+      setSearchParams({ filter: [...currentFilters, newFilter] });
+    }
+  };
 
   return (
     <article className="job-card group">
@@ -39,7 +40,7 @@ export default function JobCard({
               <button
                 type="button"
                 className="newjob rounded-button"
-                onClick={() => addFilter("new")}
+                onClick={() => handleAddFilter("new")}
               >
                 NEW!
               </button>
@@ -48,7 +49,7 @@ export default function JobCard({
               <button
                 type="button"
                 className="featured rounded-button"
-                onClick={() => addFilter("featured")}
+                onClick={() => handleAddFilter("featured")}
               >
                 FEATURED!
               </button>
@@ -75,14 +76,14 @@ export default function JobCard({
         <button
           type="button"
           className="filter-button"
-          onClick={() => addFilter(role)}
+          onClick={() => handleAddFilter(role)}
         >
           {role}
         </button>
         <button
           type="button"
           className="filter-button"
-          onClick={() => addFilter(level)}
+          onClick={() => handleAddFilter(level)}
         >
           {level}
         </button>
@@ -90,7 +91,7 @@ export default function JobCard({
           <button
             key={l}
             className="filter-button"
-            onClick={() => addFilter(l)}
+            onClick={() => handleAddFilter(l)}
           >
             {l}
           </button>
@@ -99,7 +100,7 @@ export default function JobCard({
           <button
             key={t}
             className="filter-button"
-            onClick={() => addFilter(t)}
+            onClick={() => handleAddFilter(t)}
           >
             {t}
           </button>

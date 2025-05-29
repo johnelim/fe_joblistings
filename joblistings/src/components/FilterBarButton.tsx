@@ -1,15 +1,17 @@
-import { useContext } from "react";
-import RemoveIcon from "../assets/icon-remove.svg";
-import { ActiveFilterContext } from "../contexts/ActiveFilterContext";
+import { useSearchParams } from "react-router";
+import RemoveIcon from "/assets/icon-remove.svg";
 
 export default function FilterBarButton({ label }: { label: string }) {
-  const context = useContext(ActiveFilterContext);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  if (!context) {
-    throw new Error("undefined");
-  }
-
-  const { removeFilter } = context;
+  const removeFilter = (filterToRemove: string) => {
+    const activeFilters = searchParams.getAll("filter");
+    if (activeFilters.includes(filterToRemove)) {
+      setSearchParams({
+        filter: activeFilters.filter((f) => f !== filterToRemove),
+      });
+    }
+  };
 
   return (
     <button
